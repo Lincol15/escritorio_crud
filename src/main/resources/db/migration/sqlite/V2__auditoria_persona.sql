@@ -1,0 +1,4 @@
+ALTER TABLE persona ADD COLUMN creado_en TIMESTAMP;
+ALTER TABLE persona ADD COLUMN creado_por VARCHAR(60);
+ALTER TABLE persona ADD COLUMN modificado_en TIMESTAMP;
+ALTER TABLE persona ADD COLUMN modificado_por VARCHAR(60);

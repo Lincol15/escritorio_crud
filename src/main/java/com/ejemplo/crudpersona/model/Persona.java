@@ -3,10 +3,18 @@ package com.ejemplo.crudpersona.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "persona",
        uniqueConstraints = @UniqueConstraint(name = "uk_persona_dni", columnNames = "dni"))
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,6 +51,23 @@ public class Persona {
     @Pattern(regexp = "|\\d{9}", message = "El telefono debe tener 9 digitos")
     @Column(length = 9)
     private String telefono;
+
+    // Auditoria: Spring Data llena estos campos al insertar y al actualizar
+    @CreatedDate
+    @Column(name = "creado_en", updatable = false)
+    private LocalDateTime creadoEn;
+
+    @CreatedBy
+    @Column(name = "creado_por", length = 60, updatable = false)
+    private String creadoPor;
+
+    @LastModifiedDate
+    @Column(name = "modificado_en")
+    private LocalDateTime modificadoEn;
+
+    @LastModifiedBy
+    @Column(name = "modificado_por", length = 60)
+    private String modificadoPor;
 
     public String getNombreCompleto() {
         return nombre + " " + apellido;

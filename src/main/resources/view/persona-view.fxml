@@ -54,6 +54,8 @@
                                GridPane.rowIndex="2" GridPane.columnIndex="3"/>
                 </GridPane>
 
+                <Label fx:id="lblAuditoria" styleClass="auditoria"/>
+
                 <Separator/>
 
                 <HBox spacing="10.0">
@@ -64,6 +66,8 @@
                     <Region HBox.hgrow="ALWAYS"/>
                     <TextField fx:id="txtBuscar" prefWidth="280.0"
                                promptText="Buscar por nombre, apellido o DNI"/>
+                    <Button text="Excel" onAction="#onExportarExcel" styleClass="success"/>
+                    <Button text="PDF" onAction="#onExportarPdf" styleClass="button-outlined"/>
                 </HBox>
             </VBox>
 
@@ -77,9 +81,11 @@
                         <TableColumn fx:id="colDni"      text="DNI"      prefWidth="110.0"/>
                         <TableColumn fx:id="colEmail"    text="Correo"   prefWidth="220.0"/>
                         <TableColumn fx:id="colTelefono" text="Telefono" prefWidth="120.0"/>
+                        <TableColumn fx:id="colModificado" text="Modificado" prefWidth="140.0"/>
                     </columns>
                 </TableView>
                 <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                    <ProgressIndicator fx:id="indicador" prefWidth="18.0" prefHeight="18.0" visible="false"/>
                     <Label fx:id="lblPagina" text="Pagina 1 de 1"/>
                     <Button fx:id="btnAnterior" text="Anterior"
                             onAction="#onAnterior" styleClass="button-outlined"/>
